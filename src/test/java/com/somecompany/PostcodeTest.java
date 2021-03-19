@@ -18,11 +18,26 @@ public class PostcodeTest {
 	private PostcodeService PostcodeService;
 
 	@Test
-	public void shouldBeAbleToGetSuburbByPostCode() {
+	public void shouldBeAbleToGetSuburbByPostCodeExactMatch() {
 
 		// Actual result
 
 		SuburbResponse result = PostcodeService.getSuburbByPostcode("3121");
+
+		// Assertions
+
+		assertEquals(2, result.getSuburbs().size());
+
+		assertEquals("BURNLEY, VIC", result.getSuburbs().get(0));
+		assertEquals("RICHMOND, VIC", result.getSuburbs().get(1));
+	}
+
+	@Test
+	public void shouldBeAbleToGetSuburbByPostCodePartialMatch() {
+
+		// Actual result
+
+		SuburbResponse result = PostcodeService.getSuburbByPostcode("312");
 
 		// Assertions
 
