@@ -2,8 +2,6 @@ package com.somecompany;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.somecompany.model.Postcode;
 import com.somecompany.model.PostcodePK;
+import com.somecompany.model.SuburbResponse;
 import com.somecompany.service.PostcodeService;
 
 @SpringBootTest
@@ -25,7 +24,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		List<Postcode> result = PostcodeService.getSuburbByPostcode(3121);
+		SuburbResponse result = PostcodeService.getSuburbByPostcode(3121);
 
 		// Expected result
 
@@ -45,12 +44,9 @@ public class PostcodeTest {
 
 		// Assertions
 
-		assertEquals(2, result.size());
+		assertEquals(2, result.getSuburbs().size());
 
-		assertEquals(3121, result.get(0).getPostcodePK().getPostcode());
-		assertEquals("BURNLEY, VIC", result.get(0).getPostcodePK().getSuburb());
-
-		assertEquals(3121, result.get(1).getPostcodePK().getPostcode());
-		assertEquals("RICHMOND, VIC", result.get(1).getPostcodePK().getSuburb());
+		assertEquals("BURNLEY, VIC", result.getSuburbs().get(0));
+		assertEquals("RICHMOND, VIC", result.getSuburbs().get(1));
 	}
 }

@@ -1,5 +1,6 @@
 package com.somecompany.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.somecompany.dao.PostcodeRepository;
 import com.somecompany.model.Postcode;
 import com.somecompany.model.PostcodePK;
+import com.somecompany.model.SuburbResponse;
 
 @Service
 public class PostcodeService {
@@ -17,7 +19,9 @@ public class PostcodeService {
 	@Autowired
 	private PostcodeRepository postcodeRepository;
 
-	public List<Postcode> getSuburbByPostcode(Integer postcode) {
+	public SuburbResponse getSuburbByPostcode(Integer postcode) {
+
+		// Get matching data
 
 		PostcodePK inputPostcodePK = new PostcodePK();
 		inputPostcodePK.setPostcode(postcode);
@@ -29,6 +33,17 @@ public class PostcodeService {
 		Example<Postcode> example = Example.of(inputPostcode, matcher);
 		List<Postcode> postcodeList = postcodeRepository.findAll(example);
 
-		return postcodeList;
+		// Prepare response
+
+		List<String> suburbs = new ArrayList<>();
+
+		for (Postcode p : postcodeList) {
+			suburbs.add(p.getPostcodePK().getSuburb());
+		}
+
+		SuburbResponse suburbResponse = new SuburbResponse();
+		suburbResponse.setSuburbs(suburbs);
+
+		return suburbResponse;
 	}
 }
