@@ -18,15 +18,6 @@ public class PostcodeService {
 
 	public SuburbResponse getSuburbByPostcode(String postcode) {
 
-//		// Get matching data
-//
-//		Postcode inputPostcode = new Postcode();
-//		inputPostcode.setPostcode(postcode);
-//
-//		ExampleMatcher matcher = ExampleMatcher.matchingAll();
-//		Example<Postcode> example = Example.of(inputPostcode, matcher);
-//		List<Postcode> postcodeList = postcodeRepository.findAll(example);
-
 		List<Postcode> postcodeList = postcodeRepository.findByPostcodeContaining(postcode);
 
 		// Prepare response
