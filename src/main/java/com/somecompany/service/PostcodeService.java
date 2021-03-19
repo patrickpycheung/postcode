@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.somecompany.dao.PostcodeRepository;
 import com.somecompany.model.Postcode;
+import com.somecompany.model.PostcodeResponse;
 import com.somecompany.model.SuburbResponse;
 
 @Service
@@ -32,5 +33,23 @@ public class PostcodeService {
 		suburbResponse.setSuburbs(suburbs);
 
 		return suburbResponse;
+	}
+
+	public PostcodeResponse getPostcodeBySuburb(String suburb) {
+
+		List<Postcode> postcodeList = postcodeRepository.findBySuburbContaining(suburb);
+
+		// Prepare response
+
+		List<String> postcodes = new ArrayList<>();
+
+		for (Postcode p : postcodeList) {
+			postcodes.add(p.getPostcode());
+		}
+
+		PostcodeResponse postcodeResponse = new PostcodeResponse();
+		postcodeResponse.setPostcodes(postcodes);
+
+		return postcodeResponse;
 	}
 }

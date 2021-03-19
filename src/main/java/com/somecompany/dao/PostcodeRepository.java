@@ -11,4 +11,6 @@ import com.somecompany.model.Postcode;
 public interface PostcodeRepository extends JpaRepository<Postcode, Long> {
 
 	List<Postcode> findByPostcodeContaining(String postcode);
+
+	List<Postcode> findBySuburbContaining(String suburb);
 }

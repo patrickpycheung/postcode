@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.somecompany.model.PostcodeResponse;
 import com.somecompany.model.SuburbResponse;
 import com.somecompany.service.PostcodeService;
 
@@ -45,5 +46,35 @@ public class PostcodeTest {
 
 		assertEquals("BURNLEY, VIC", result.getSuburbs().get(0));
 		assertEquals("RICHMOND, VIC", result.getSuburbs().get(1));
+	}
+
+	@Test
+	public void shouldBeAbleToGetPostCodeBySuburbExactMatch() {
+
+		// Actual result
+
+		PostcodeResponse result = PostcodeService.getPostcodeBySuburb("PARRAMATTA, NSW");
+
+		// Assertions
+
+		assertEquals(2, result.getPostcodes().size());
+
+		assertEquals("2124", result.getPostcodes().get(0));
+		assertEquals("2150", result.getPostcodes().get(1));
+	}
+
+	@Test
+	public void shouldBeAbleToGetPostcodeBySuburbPartialMatch() {
+
+		// Actual result
+
+		PostcodeResponse result = PostcodeService.getPostcodeBySuburb("PAR");
+
+		// Assertions
+
+		assertEquals(2, result.getPostcodes().size());
+
+		assertEquals("2124", result.getPostcodes().get(0));
+		assertEquals("2150", result.getPostcodes().get(1));
 	}
 }
