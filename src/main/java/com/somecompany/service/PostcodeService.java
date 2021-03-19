@@ -52,4 +52,9 @@ public class PostcodeService {
 
 		return postcodeResponse;
 	}
+
+	public void addPostcodeAndSuburb(Postcode postcode) {
+
+		postcodeRepository.save(postcode);
+	}
 }

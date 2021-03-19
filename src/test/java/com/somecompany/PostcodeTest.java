@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.somecompany.dao.PostcodeRepository;
+import com.somecompany.model.Postcode;
 import com.somecompany.model.PostcodeResponse;
 import com.somecompany.model.SuburbResponse;
 import com.somecompany.service.PostcodeService;
@@ -16,14 +18,17 @@ import com.somecompany.service.PostcodeService;
 public class PostcodeTest {
 
 	@Autowired
-	private PostcodeService PostcodeService;
+	private PostcodeService postcodeService;
+
+	@Autowired
+	private PostcodeRepository postcodeRepository;
 
 	@Test
 	public void shouldBeAbleToGetSuburbByPostCodeExactMatch() {
 
 		// Actual result
 
-		SuburbResponse result = PostcodeService.getSuburbByPostcode("3121");
+		SuburbResponse result = postcodeService.getSuburbByPostcode("3121");
 
 		// Assertions
 
@@ -38,7 +43,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		SuburbResponse result = PostcodeService.getSuburbByPostcode("312");
+		SuburbResponse result = postcodeService.getSuburbByPostcode("312");
 
 		// Assertions
 
@@ -53,7 +58,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		PostcodeResponse result = PostcodeService.getPostcodeBySuburb("PARRAMATTA, NSW");
+		PostcodeResponse result = postcodeService.getPostcodeBySuburb("PARRAMATTA, NSW");
 
 		// Assertions
 
@@ -68,7 +73,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		PostcodeResponse result = PostcodeService.getPostcodeBySuburb("PAR");
+		PostcodeResponse result = postcodeService.getPostcodeBySuburb("PAR");
 
 		// Assertions
 
@@ -76,5 +81,24 @@ public class PostcodeTest {
 
 		assertEquals("2124", result.getPostcodes().get(0));
 		assertEquals("2150", result.getPostcodes().get(1));
+	}
+
+	@Test
+	public void shouldBeAbleToAddPostcodeAndSuburb() {
+
+		// Actual result
+
+		Postcode postcode = new Postcode();
+		postcode.setPostcode("1234");
+		postcode.setSuburb("Test");
+
+		postcodeService.addPostcodeAndSuburb(postcode);
+
+		// Assertions
+
+		assertEquals(7, postcodeRepository.count());
+
+		assertEquals("1234", postcodeRepository.findBySuburbContaining("Test").get(0).getPostcode());
+		assertEquals("Test", postcodeRepository.findByPostcodeContaining("1234").get(0).getSuburb());
 	}
 }
