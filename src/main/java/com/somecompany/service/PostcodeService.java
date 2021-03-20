@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.somecompany.dao.PostcodeRepository;
+import com.somecompany.model.GetPostcodeResponse;
+import com.somecompany.model.GetSuburbResponse;
 import com.somecompany.model.Postcode;
-import com.somecompany.model.PostcodeResponse;
-import com.somecompany.model.SuburbResponse;
 
 @Service
 public class PostcodeService {
@@ -17,7 +17,7 @@ public class PostcodeService {
 	@Autowired
 	private PostcodeRepository postcodeRepository;
 
-	public SuburbResponse getSuburbByPostcode(String postcode) {
+	public GetSuburbResponse getSuburbByPostcode(String postcode) {
 
 		List<Postcode> postcodeList = postcodeRepository.findByPostcodeContaining(postcode);
 
@@ -29,13 +29,13 @@ public class PostcodeService {
 			suburbs.add(p.getSuburb());
 		}
 
-		SuburbResponse suburbResponse = new SuburbResponse();
-		suburbResponse.setSuburbs(suburbs);
+		GetSuburbResponse getSuburbResponse = new GetSuburbResponse();
+		getSuburbResponse.setSuburbs(suburbs);
 
-		return suburbResponse;
+		return getSuburbResponse;
 	}
 
-	public PostcodeResponse getPostcodeBySuburb(String suburb) {
+	public GetPostcodeResponse getPostcodeBySuburb(String suburb) {
 
 		List<Postcode> postcodeList = postcodeRepository.findBySuburbContaining(suburb);
 
@@ -47,10 +47,10 @@ public class PostcodeService {
 			postcodes.add(p.getPostcode());
 		}
 
-		PostcodeResponse postcodeResponse = new PostcodeResponse();
-		postcodeResponse.setPostcodes(postcodes);
+		GetPostcodeResponse getPostcodeResponse = new GetPostcodeResponse();
+		getPostcodeResponse.setPostcodes(postcodes);
 
-		return postcodeResponse;
+		return getPostcodeResponse;
 	}
 
 	public void addPostcodeAndSuburb(Postcode postcode) {

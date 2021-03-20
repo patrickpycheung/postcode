@@ -9,8 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.somecompany.dao.PostcodeRepository;
 import com.somecompany.model.Postcode;
-import com.somecompany.model.PostcodeResponse;
-import com.somecompany.model.SuburbResponse;
+import com.somecompany.model.GetPostcodeResponse;
+import com.somecompany.model.GetSuburbResponse;
 import com.somecompany.service.PostcodeService;
 
 @SpringBootTest
@@ -28,7 +28,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		SuburbResponse result = postcodeService.getSuburbByPostcode("3121");
+		GetSuburbResponse result = postcodeService.getSuburbByPostcode("3121");
 
 		// Assertions
 
@@ -43,7 +43,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		SuburbResponse result = postcodeService.getSuburbByPostcode("312");
+		GetSuburbResponse result = postcodeService.getSuburbByPostcode("312");
 
 		// Assertions
 
@@ -58,7 +58,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		PostcodeResponse result = postcodeService.getPostcodeBySuburb("PARRAMATTA, NSW");
+		GetPostcodeResponse result = postcodeService.getPostcodeBySuburb("PARRAMATTA, NSW");
 
 		// Assertions
 
@@ -73,7 +73,7 @@ public class PostcodeTest {
 
 		// Actual result
 
-		PostcodeResponse result = postcodeService.getPostcodeBySuburb("PAR");
+		GetPostcodeResponse result = postcodeService.getPostcodeBySuburb("PAR");
 
 		// Assertions
 

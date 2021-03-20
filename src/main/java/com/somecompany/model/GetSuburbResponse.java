@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PostcodeResponse {
+public class GetSuburbResponse {
 
-	private List<String> postcodes;
+	private List<String> suburbs;
 }
