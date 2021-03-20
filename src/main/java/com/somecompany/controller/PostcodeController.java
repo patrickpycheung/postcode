@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -41,7 +40,7 @@ public class PostcodeController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Successfully retrieved suburb list.", response = GetSuburbResponse.class) })
 	public ResponseEntity<Object> getSuburbByPostcode(
-			@RequestParam @NotNull(message = "Postcode cannot be null!") @NotEmpty(message = "Postcode cannot be empty!") @Pattern(regexp = "^[0-9]+$", message = "Postcode must be a number!") @Size(min = 3, max = 4, message = "Please provide at least 3 but no more than 4 characters for postcode!") String postcode) {
+			@RequestParam @NotEmpty(message = "Postcode cannot be null nor empty!") @Pattern(regexp = "^[0-9]+$", message = "Postcode must be a number!") @Size(min = 3, max = 4, message = "Please provide at least 3 but no more than 4 characters for postcode!") String postcode) {
 
 		try {
 			return ResponseEntity.ok(postcodeService.getSuburbByPostcode(postcode));
