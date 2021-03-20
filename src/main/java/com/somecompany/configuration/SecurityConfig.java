@@ -16,18 +16,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.cors().and().authorizeRequests().antMatchers(
-				// Index page
-				"/",
-				// Error page
-				"/error",
-				// Web jars
-				"/webjars/**",
-				// Actuator
-				"/actuator/**",
-				// H2 DB console
-				"/h2-console/**").permitAll().antMatchers(SWAGGER_WHITELIST).permitAll().antMatchers(API_WHITELIST)
-				.permitAll().anyRequest().authenticated().and().oauth2ResourceServer().jwt();
+		http
+			.cors()
+			.and()
+			.authorizeRequests()
+				.antMatchers(
+				// Health-check page
+					"/healthcheck.html",
+					// Error page
+					"/error",
+					// Web jars
+					"/webjars/**",
+					// Actuator
+					"/actuator/**",
+					// H2 DB console
+					"/h2-console/**")
+					.permitAll()
+				.antMatchers(SWAGGER_WHITELIST)
+					.permitAll()
+				.antMatchers(API_WHITELIST)
+					.permitAll()
+				.anyRequest()
+					.authenticated()
+					.and()
+					.oauth2ResourceServer()
+						.jwt();
 
 		http.csrf().ignoringAntMatchers("/h2-console/**");
 		http.headers().frameOptions().sameOrigin();
