@@ -13,13 +13,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.somecompany.error.ApiError;
+import com.somecompany.model.AddPostcodeAndSuburbRequest;
 import com.somecompany.model.GetPostcodeResponse;
 import com.somecompany.model.GetSuburbResponse;
+import com.somecompany.model.Postcode;
 import com.somecompany.service.PostcodeService;
 
 import io.swagger.annotations.ApiOperation;
@@ -59,6 +63,25 @@ public class PostcodeController {
 
 		try {
 			return ResponseEntity.ok(postcodeService.getPostcodeBySuburb(suburb));
+		} catch (Exception e) {
+			return getErrorResponse(e);
+		}
+	}
+
+	@PutMapping(path = "", produces = "application/json")
+	@ApiOperation(value = "Add a new suburb and postcode combination.")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully added a new suburb and postcode combination.", response = String.class) })
+	public ResponseEntity<Object> addPostcodeAndSuburb(@RequestBody AddPostcodeAndSuburbRequest request) {
+
+		try {
+			Postcode postcode = new Postcode();
+			postcode.setPostcode(request.getPostcode());
+			postcode.setSuburb(request.getSuburb());
+
+			postcodeService.addPostcodeAndSuburb(postcode);
+
+			return ResponseEntity.ok("Successfully added a new suburb and postcode combination.");
 		} catch (Exception e) {
 			return getErrorResponse(e);
 		}

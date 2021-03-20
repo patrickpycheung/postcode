@@ -55,6 +55,13 @@ public class PostcodeService {
 
 	public void addPostcodeAndSuburb(Postcode postcode) {
 
-		postcodeRepository.save(postcode);
+		// Get all records for the postcode, if any
+		List<Postcode> postcodes = postcodeRepository.findByPostcode(postcode.getPostcode());
+
+		if (!postcodes.contains(postcode)) {
+			// The combination has not yet been created
+
+			postcodeRepository.save(postcode);
+		}
 	}
 }

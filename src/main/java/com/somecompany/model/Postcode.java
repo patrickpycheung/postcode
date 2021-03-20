@@ -1,5 +1,7 @@
 package com.somecompany.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,4 +37,32 @@ public class Postcode {
 	@Column(name = "suburbinfo")
 	@Size(min = 0, max = 100, message = "Suburb information must have length between 0 and 100!")
 	private String suburbinfo;
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+
+		if (obj == null)
+			return false;
+
+		if (getClass() != obj.getClass())
+			return false;
+
+		if (postcode == null || suburb == null) {
+			return false;
+		}
+
+		Postcode other = (Postcode) obj;
+		if (postcode.equals(other.getPostcode()) && suburb.equals(other.getSuburb())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
