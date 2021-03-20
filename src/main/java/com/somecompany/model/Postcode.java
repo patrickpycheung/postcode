@@ -29,7 +29,7 @@ public class Postcode {
 
 	@Column(name = "suburb")
 	@NotEmpty(message = "Suburb cannot be null nor empty!")
-	@Size(min = 1, max = 100, message = "Suburb must have length between 1 and 100!")
+	@Size(min = 3, max = 100, message = "Suburb must have length between 3 and 100!")
 	private String suburb;
 
 	@Column(name = "suburbinfo")
