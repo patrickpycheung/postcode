@@ -24,6 +24,7 @@ public class Postcode {
 	@Column(name = "postcode")
 	@NotEmpty(message = "Postcode cannot be null nor empty!")
 	@Pattern(regexp = "^[0-9]+$", message = "Postcode must be a number!")
+	@Size(min = 4, max = 4, message = "Postcode must be of 4 characters!")
 	private String postcode;
 
 	@Column(name = "suburb")
