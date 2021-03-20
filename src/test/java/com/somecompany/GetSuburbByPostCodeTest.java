@@ -59,7 +59,7 @@ public class GetSuburbByPostCodeTest {
 	@Test
 	public void shouldBeAbleToGetSuburbByPostCodeExactMatchThroughAPI() {
 
-		webTestClient.get().uri("/api/postcode?postcode=3121").exchange().expectStatus().isOk()
+		webTestClient.get().uri("/api/postcode/suburb?postcode=3121").exchange().expectStatus().isOk()
 				.expectBody(GetSuburbResponse.class).value(result -> {
 					// Assertions
 
@@ -73,7 +73,7 @@ public class GetSuburbByPostCodeTest {
 	@Test
 	public void shouldBeAbleToGetSuburbByPostCodePartialMatchThroughAPI() {
 
-		webTestClient.get().uri("/api/postcode?postcode=312").exchange().expectStatus().isOk()
+		webTestClient.get().uri("/api/postcode/suburb?postcode=312").exchange().expectStatus().isOk()
 				.expectBody(GetSuburbResponse.class).value(result -> {
 					// Assertions
 
@@ -86,8 +86,8 @@ public class GetSuburbByPostCodeTest {
 
 	@Test
 	public void shouldBeAbleToThrowErrorIfPostcodeIsMissingOnGetSuburbByPostCodePartialMatchThroughAPI() {
-		webTestClient.get().uri("/api/postcode").exchange().expectStatus().isBadRequest().expectBody(ApiError.class)
-				.value(result -> {
+		webTestClient.get().uri("/api/postcode/suburb").exchange().expectStatus().isBadRequest()
+				.expectBody(ApiError.class).value(result -> {
 					// Assertions
 
 					assertEquals(HttpStatus.BAD_REQUEST, result.getStatus());
@@ -98,7 +98,7 @@ public class GetSuburbByPostCodeTest {
 
 	@Test
 	public void shouldBeAbleToThrowErrorIfPostcodeLengthIsLessThan3OnGetSuburbByPostCodePartialMatchThroughAPI() {
-		webTestClient.get().uri("/api/postcode?postcode=31").exchange().expectStatus().isBadRequest()
+		webTestClient.get().uri("/api/postcode/suburb?postcode=31").exchange().expectStatus().isBadRequest()
 				.expectBody(ApiError.class).value(result -> {
 					// Assertions
 
@@ -110,7 +110,7 @@ public class GetSuburbByPostCodeTest {
 
 	@Test
 	public void shouldBeAbleToThrowErrorIfPostcodeLengthIsMoreThan4OnGetSuburbByPostCodePartialMatchThroughAPI() {
-		webTestClient.get().uri("/api/postcode?postcode=31211").exchange().expectStatus().isBadRequest()
+		webTestClient.get().uri("/api/postcode/suburb?postcode=31211").exchange().expectStatus().isBadRequest()
 				.expectBody(ApiError.class).value(result -> {
 					// Assertions
 
@@ -123,7 +123,7 @@ public class GetSuburbByPostCodeTest {
 
 	@Test
 	public void shouldBeAbleToThrowErrorIfPostcodeIsNonNumericOnGetSuburbByPostCodePartialMatchThroughAPI() {
-		webTestClient.get().uri("/api/postcode?postcode=###").exchange().expectStatus().isBadRequest()
+		webTestClient.get().uri("/api/postcode/suburb?postcode=###").exchange().expectStatus().isBadRequest()
 				.expectBody(ApiError.class).value(result -> {
 					// Assertions
 

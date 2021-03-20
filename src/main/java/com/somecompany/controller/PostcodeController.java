@@ -35,7 +35,7 @@ public class PostcodeController {
 	@Autowired
 	private PostcodeService postcodeService;
 
-	@GetMapping(path = "", produces = "application/json")
+	@GetMapping(path = "/suburb", produces = "application/json")
 	@ApiOperation(value = "Get a list of suburbs matching the postcode.")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Successfully retrieved suburb list.", response = GetSuburbResponse.class) })

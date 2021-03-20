@@ -9,6 +9,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String[] SWAGGER_WHITELIST = { "/swagger-resources/**", "/swagger-ui.html", "/v2/**" };
 
+	private static final String[] API_WHITELIST = {"/api/postcode/suburb", "/api/postcode/postcode"};
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -19,8 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(
 					// Index page
 					"/",
-					// API endpoint
-					"/api/postcode",
 					// Error page
 					"/error",
 					// Web jars
@@ -31,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					"/h2-console/**")
 						.permitAll()
 				.antMatchers(SWAGGER_WHITELIST)
+					.permitAll()
+				.antMatchers(API_WHITELIST)
 					.permitAll()
 				.anyRequest()
 					.authenticated()
