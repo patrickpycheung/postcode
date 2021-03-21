@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.somecompany.dao.PostcodeRepository;
 import com.somecompany.model.GetPostcodeResponse;
@@ -75,6 +76,7 @@ public class PostcodeService {
 	 * 
 	 * @param postcode The Postcode object to be added
 	 */
+	@Transactional
 	public void addPostcodeAndSuburb(Postcode postcode) {
 
 		// Get all records for the postcode, if any
