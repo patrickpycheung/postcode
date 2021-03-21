@@ -56,7 +56,7 @@ public class AddPostcodeAndSuburbTest {
 
 		assertEquals(7, postcodeRepository.count());
 
-		assertEquals("1234", postcodeRepository.findBySuburbContaining("Test").get(0).getPostcode());
+		assertEquals("1234", postcodeRepository.findBySuburbContainingIgnoreCase("Test").get(0).getPostcode());
 		assertEquals("Test", postcodeRepository.findByPostcodeContaining("1234").get(0).getSuburb());
 	}
 
@@ -86,7 +86,7 @@ public class AddPostcodeAndSuburbTest {
 
 					assertEquals(7, postcodeRepository.count());
 
-					assertEquals("1234", postcodeRepository.findBySuburbContaining("Test").get(0).getPostcode());
+					assertEquals("1234", postcodeRepository.findBySuburbContainingIgnoreCase("Test").get(0).getPostcode());
 					assertEquals("Test", postcodeRepository.findByPostcodeContaining("1234").get(0).getSuburb());
 				});
 	}

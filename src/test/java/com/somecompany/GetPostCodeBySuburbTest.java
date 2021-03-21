@@ -34,7 +34,7 @@ public class GetPostCodeBySuburbTest {
 	private WebTestClient webTestClient;
 
 	@Test
-	public void shouldBeAbleToGetPostCodeBySuburbExactMatch() {
+	public void shouldBeAbleToGetPostCodeBySuburbExactMatchInUpperCase() {
 
 		// Actual result
 
@@ -47,13 +47,43 @@ public class GetPostCodeBySuburbTest {
 		assertEquals("2124", result.getPostcodes().get(0));
 		assertEquals("2150", result.getPostcodes().get(1));
 	}
+	
+	@Test
+	public void shouldBeAbleToGetPostCodeBySuburbExactMatchInLowerCase() {
+
+		// Actual result
+
+		GetPostcodeResponse result = postcodeService.getPostcodeBySuburb("parramatta, nsw");
+
+		// Assertions
+
+		assertEquals(2, result.getPostcodes().size());
+
+		assertEquals("2124", result.getPostcodes().get(0));
+		assertEquals("2150", result.getPostcodes().get(1));
+	}
 
 	@Test
-	public void shouldBeAbleToGetPostcodeBySuburbPartialMatch() {
+	public void shouldBeAbleToGetPostcodeBySuburbPartialMatchInUpperCase() {
 
 		// Actual result
 
 		GetPostcodeResponse result = postcodeService.getPostcodeBySuburb("PAR");
+
+		// Assertions
+
+		assertEquals(2, result.getPostcodes().size());
+
+		assertEquals("2124", result.getPostcodes().get(0));
+		assertEquals("2150", result.getPostcodes().get(1));
+	}
+	
+	@Test
+	public void shouldBeAbleToGetPostcodeBySuburbPartialMatchInLowerCase() {
+
+		// Actual result
+
+		GetPostcodeResponse result = postcodeService.getPostcodeBySuburb("par");
 
 		// Assertions
 

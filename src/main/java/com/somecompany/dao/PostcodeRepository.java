@@ -20,5 +20,5 @@ public interface PostcodeRepository extends JpaRepository<Postcode, Long> {
 
 	List<Postcode> findByPostcodeContaining(String postcode);
 
-	List<Postcode> findBySuburbContaining(String suburb);
+	List<Postcode> findBySuburbContainingIgnoreCase(String suburb);
 }

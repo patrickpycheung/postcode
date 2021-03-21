@@ -54,7 +54,7 @@ public class PostcodeService {
 	 */
 	public GetPostcodeResponse getPostcodeBySuburb(String suburb) {
 
-		List<Postcode> postcodeList = postcodeRepository.findBySuburbContaining(suburb);
+		List<Postcode> postcodeList = postcodeRepository.findBySuburbContainingIgnoreCase(suburb);
 
 		// Prepare response
 
