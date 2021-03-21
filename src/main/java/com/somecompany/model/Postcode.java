@@ -64,7 +64,7 @@ public class Postcode {
 		}
 
 		Postcode other = (Postcode) obj;
-		if (postcode.equals(other.getPostcode()) && suburb.equals(other.getSuburb())) {
+		if (postcode.equals(other.getPostcode()) && suburb.toLowerCase().equals(other.getSuburb().toLowerCase())) {
 			return true;
 		} else {
 			return false;

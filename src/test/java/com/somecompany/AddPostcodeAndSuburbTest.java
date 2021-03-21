@@ -61,13 +61,29 @@ public class AddPostcodeAndSuburbTest {
 	}
 
 	@Test
-	public void shouldBeAbleToSkipAddIfCombinationAlreadyExistsOnAddPostcodeAndSuburb() {
+	public void shouldBeAbleToSkipAddIfCombinationAlreadyExistsAsExactMatchOnAddPostcodeAndSuburb() {
 
 		// Actual result
 
 		Postcode postcode = new Postcode();
 		postcode.setPostcode("3121");
 		postcode.setSuburb("RICHMOND, VIC");
+
+		postcodeService.addPostcodeAndSuburb(postcode);
+
+		// Assertions
+
+		assertEquals(6, postcodeRepository.count());
+	}
+	
+	@Test
+	public void shouldBeAbleToSkipAddIfCombinationAlreadyExistsAsDifferntCaseOnAddPostcodeAndSuburb() {
+
+		// Actual result
+
+		Postcode postcode = new Postcode();
+		postcode.setPostcode("3121");
+		postcode.setSuburb("richmond, VIC");
 
 		postcodeService.addPostcodeAndSuburb(postcode);
 
@@ -92,10 +108,22 @@ public class AddPostcodeAndSuburbTest {
 	}
 
 	@Test
-	public void shouldBeAbleToSkipAddIfCombinationAlreadyExistsOnAddPostcodeAndSuburbThroughAPICall() {
+	public void shouldBeAbleToSkipAddIfCombinationAlreadyExistsAsExactMatchOnAddPostcodeAndSuburbThroughAPICall() {
 
 		webTestClient.put().uri("/api/postcode").contentType(MediaType.APPLICATION_JSON)
 				.bodyValue("{ \"postcode\": \"3121\", \"suburb\": \"RICHMOND, VIC\"}").exchange().expectStatus().isOk()
+				.expectBody(String.class).value(result -> {
+					// Assertions
+
+					assertEquals(6, postcodeRepository.count());
+				});
+	}
+	
+	@Test
+	public void shouldBeAbleToSkipAddIfCombinationAlreadyExistsAsDifferentCaseOnAddPostcodeAndSuburbThroughAPICall() {
+
+		webTestClient.put().uri("/api/postcode").contentType(MediaType.APPLICATION_JSON)
+				.bodyValue("{ \"postcode\": \"3121\", \"suburb\": \"richmond, VIC\"}").exchange().expectStatus().isOk()
 				.expectBody(String.class).value(result -> {
 					// Assertions
 
