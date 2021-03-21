@@ -3,18 +3,32 @@ spring:
     oauth2:
       resourceserver:
         jwt:
+          # Endpoint for returning a set of public keys that the resource server uses to validate the cryptographic signature of the access token
           jwk-set-uri: https://dev-27548664.okta.com/oauth2/default/v1/keys
 
-spring.datasource.url: jdbc:h2:mem:testdb
-spring.datasource.driverClassName: org.h2.Driver
-spring.datasource.username: sa
-spring.datasource.password: ""
-spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-spring.h2.console.enabled: true
-spring.jpa.hibernate.ddl-auto: create-drop
-spring.h2.console.settings.web-allow-others: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+    
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      # Create tables at application start, drop tables at application end
+      ddl-auto: create-drop
+      
+  h2:
+    console:
+      # Enable H2 admin console
+      enabled: true
+      settings:
+        # Allow remote access of admin console
+        web-allow-others: true
 
 server:
   error:
+    # Include exception message in default server error response
     include-message: always
+    # Include exception details in default server error response
     include-binding-errors: always

@@ -5,12 +5,19 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * HTTP traffic configuration (production profile).
+ * 
+ * @author patrick
+ */
 @Configuration
 @Profile("!test")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	// URL path patterns allowed for swagger pages
 	private static final String[] SWAGGER_WHITELIST = { "/swagger-resources/**", "/swagger-ui.html", "/v2/**" };
 
+	// URL path patterns allowed for API endpoints
 	private static final String[] API_WHITELIST = { "/api/postcode/suburb", "/api/postcode/postcode" };
 
 	@Override
@@ -21,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 				.antMatchers(
-				// Health-check page
+					// Health-check page
 					"/healthcheck.html",
 					// Error page
 					"/error",
@@ -36,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.permitAll()
 				.antMatchers(API_WHITELIST)
 					.permitAll()
+				// Require JWT authentication for all other requests
 				.anyRequest()
 					.authenticated()
 					.and()

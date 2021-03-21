@@ -14,6 +14,11 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The entity model of a row in the "POSTCODE" table.
+ * 
+ * @author patrick
+ */
 @Entity
 @Getter
 @Setter

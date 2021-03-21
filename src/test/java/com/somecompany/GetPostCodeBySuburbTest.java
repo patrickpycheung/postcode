@@ -17,6 +17,11 @@ import com.somecompany.error.ApiError;
 import com.somecompany.model.GetPostcodeResponse;
 import com.somecompany.service.PostcodeService;
 
+/**
+ * Test cases for "get a list of postcodes matching the suburb".
+ * 
+ * @author patrick
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase

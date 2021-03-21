@@ -3,6 +3,11 @@ package com.somecompany;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Main application.
+ * 
+ * @author patrick
+ */
 @SpringBootApplication
 public class PostcodeApplication {
 

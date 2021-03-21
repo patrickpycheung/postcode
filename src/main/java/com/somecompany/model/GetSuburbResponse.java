@@ -2,11 +2,14 @@ package com.somecompany.model;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+/**
+ * The model of a response to a request calling the endpoint to get a list of suburbs matching the postcode.
+ * 
+ * @author patrick
+ */
+@Data
 public class GetSuburbResponse {
 
 	private List<String> suburbs;

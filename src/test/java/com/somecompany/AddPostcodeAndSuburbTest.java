@@ -21,6 +21,11 @@ import com.somecompany.error.ApiError;
 import com.somecompany.model.Postcode;
 import com.somecompany.service.PostcodeService;
 
+/**
+ * Test cases for "add new suburb and postcode combination".
+ * 
+ * @author patrick
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient(timeout = "50000")

@@ -31,6 +31,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Controller which handles the application's API requests.
+ * 
+ * @author patrick
+ */
 @RestController
 @RequestMapping("/api/postcode")
 @Validated
@@ -40,6 +45,12 @@ public class PostcodeController {
 	@Autowired
 	private PostcodeService postcodeService;
 
+	/**
+	 * API endpoint for the service to get a list of suburbs matching the postcode.
+	 * 
+	 * @param postcode The postcode pattern from the query parameter.
+	 * @return ResponseEntity<Object> A response which contains a list of suburbs matching the postcode pattern
+	 */
 	@GetMapping(path = "/suburb", produces = "application/json")
 	@ApiOperation(value = "Get a list of suburbs matching the postcode.")
 	@ApiResponses(value = {
@@ -54,6 +65,12 @@ public class PostcodeController {
 		}
 	}
 
+	/**
+	 * API endpoint for the service to get a list of postcodes matching the suburb.
+	 * 
+	 * @param suburb The suburb pattern from the query parameter.
+	 * @return ResponseEntity<Object> A response which contains a list of postcodes matching the suburb pattern
+	 */
 	@GetMapping(path = "/postcode", produces = "application/json")
 	@ApiOperation(value = "Get a list of postcodes matching the suburb.")
 	@ApiResponses(value = {
@@ -68,6 +85,12 @@ public class PostcodeController {
 		}
 	}
 
+	/**
+	 * API endpoint for the service to a add new suburb and postcode combination.
+	 * 
+	 * @param request The postcode and suburb combination info from the request body.
+	 * @return A string indicating the operation has completed.
+	 */
 	@PutMapping(path = "", produces = "application/json")
 	@ApiOperation(value = "Add a new suburb and postcode combination.")
 	@ApiResponses(value = {
@@ -88,10 +111,10 @@ public class PostcodeController {
 	}
 
 	/**
-	 * Create error response from exception messages.
+	 * Create error response from exception messages arised from bean validation.
 	 * 
-	 * @param exception
-	 * @return A list of all error responses
+	 * @param exception Exception arised from bean validation
+	 * @return A list of error responses
 	 */
 	private ResponseEntity<Object> getErrorResponse(Exception exception) {
 		List<String> errors = new ArrayList<String>();

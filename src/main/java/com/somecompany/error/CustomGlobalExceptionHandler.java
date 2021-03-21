@@ -24,7 +24,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * The custom exception handler to handle exceptions thrown when there is error with the request.
+ * The custom exception handler to handle exceptions thrown when there is error (verbs, parameters, etc.) with the
+ * request.<br/>
+ * These are errors thrown before the request is being handled in the business logic.
  * 
  * @author patrick
  *
