@@ -4,7 +4,7 @@
 FROM maven:3.6.3-jdk-11 AS build
 
 # Specify the directory to hold the source in the container, and cd to there
-WORKDIR /opt/source/suburb-and-postcode
+WORKDIR /opt/source/postcode
 
 # Copy local source to source folder in container
 COPY src src
@@ -25,7 +25,7 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 WORKDIR /opt/app
 
 #Copy the built jar to the application folder on the container
-COPY --from=build /opt/source/suburb-and-postcode/target/suburb-and-postcode-1.0.0.jar app.jar
+COPY --from=build /opt/source/postcode/target/postcode-1.0.0.jar app.jar
 
 # Run application in container
 ENTRYPOINT ["java","-jar","app.jar"]
