@@ -1,0 +1,25 @@
+version: 0.2 
+ 
+env:
+  secrets-manager:
+    DOCKERHUB_USERNAME: "/dockerhub:username"
+    DOCKERHUB_PASSWORD: "/dockerhub:password"
+ 
+phases: 
+  pre_build: 
+    commands: 
+    - echo Logging in to Docker Hub.... 
+    - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASSWORD
+
+  build: 
+    commands: 
+    - echo Build started on `date` 
+    - echo Building the Docker image... 
+    - docker build --rm -t patrick888/postcode:latest .
+
+  post_build: 
+    commands: 
+    - echo Build completed on `date` 
+    - echo pushing to repo
+    - docker push patrick888/postcode:latest 
+ 
