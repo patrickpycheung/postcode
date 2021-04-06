@@ -11,13 +11,13 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: ""
-    
+
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       # Create tables at application start, drop tables at application end
       ddl-auto: create-drop
-      
+
   h2:
     console:
       # Enable H2 admin console
@@ -32,3 +32,4 @@ server:
     include-message: always
     # Include exception details in default server error response
     include-binding-errors: always
+  port: 80
