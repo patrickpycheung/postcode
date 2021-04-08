@@ -30,4 +30,8 @@ phases:
     - echo pushing to repo
     - docker push patrick888/postcode:latest
     - printf '{"ImageURI":"patrick888/postcode:latest"}' > imageDetail.json
+
+  artifacts:
+    files:
+      - imageDetail.json
  
