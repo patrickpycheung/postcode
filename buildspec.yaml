@@ -28,5 +28,6 @@ phases:
     commands: 
     - echo Build completed on `date` 
     - echo pushing to repo
-    - docker push patrick888/postcode:latest 
+    - docker push patrick888/postcode:latest
+    - printf '{"ImageURI":"patrick888/postcode:latest"}' > imageDetail.json
  
